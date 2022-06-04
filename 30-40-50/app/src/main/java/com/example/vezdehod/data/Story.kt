@@ -1,4 +1,4 @@
-package com.example.vezdehod
+package com.example.vezdehod.data
 
 data class Story(
     val city: String,

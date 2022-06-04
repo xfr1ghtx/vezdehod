@@ -1,5 +1,12 @@
 # vezdehod - sportProg
+## Task 10:
+Код решения на codeforces: 159447774
+
+## Task 20:
+Код решения на codeforces: 159470860
+
 ## Task 30:
+Требуется установить библиотеку requests
 Запустите файл 30_points_task
 
 ## Task 40:

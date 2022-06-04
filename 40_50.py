@@ -4,6 +4,7 @@ from discord.ext import commands, tasks
 from datetime import datetime as dt
 import requests
 
+# В той же ветке на гите лежит файл README.md с описанием работы бота
 
 def read_csv(filename = './students.csv'):
     rows = []

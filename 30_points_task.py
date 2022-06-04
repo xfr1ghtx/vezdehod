@@ -8,21 +8,21 @@ def count_tries(users):
         request_info = requests.get(link + user)
         json_obj = dict(request_info.json())
 
-        contests = []
+        tasks = []
 
         for submissions in json_obj['result']:
             prob = submissions.get('problem')
             if prob.get('contestId'):
-                contests.append(
+                tasks.append(
                     str(prob.get('contestId')) + prob.get('index')
                 )
             else:
-                contests.append(
+                tasks.append(
                     prob.get('index')
                 )
 
         print(
-            user, len(set(contests))
+            user, len(set(tasks))
         )
 
 

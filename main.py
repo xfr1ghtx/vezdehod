@@ -29,24 +29,24 @@ def create_response(session, response, **kwargs):
 users = {}
 
 questions = [
-    create_question("^Что^ вывед`ет пр`ограмма?\nlet a = 5\nlet b = 7\nconsole.log({a+b}{ а плюс ^бэ^ })",
-                    ["12"], 'algorithms'),
+    create_question("<speaker audio_vk_id=2000512046_456239028>{Что выведет программа?}{} <speak>let a = 5 let b = 7 console.log({a+b}{ а плюс ^бэ^ })</speak> <s>Введите текст</s>",
+        ["12"], 'algorithms'),
     create_question("На каком языке пишут приложения для IOS?",
-                    ["swift", "свифт", "обжектив-си", "objective-c"], 'mobile'),
-    create_question("Как называется ^самый^ распространённый язык для работы с реляционными базами данных?",
-                    ["sql"], 'backend'),
-    create_question("Как называется вид инъекции, направленный на взлом реляционных баз данных?",
-                    ["sql", "sql-injection", "sql-инъекция"], 'security'),
+        ["swift", "свифт", "обжектив-си", "objective-c"], 'mobile'),
+    create_question("<speaker audio_vk_id=2000512046_456239026>{Как называется самый распространённый язык для работы с реляционными базами данных}{}",
+        ["sql"], 'backend'),
+    create_question("<speaker audio_vk_id=2000512046_456239027>{Как называется вид инъекции, направленный на взлом реляцонных баз данных?}{} Введите текст",
+        ["sql", "sql-injection", "sql-инъекция"], 'security'),
     create_question("Интерфейс для взаимодействия других программ с вашим сервисом",
-                    ["api", "апи"], 'backend'),
+        ["api", "апи"], 'backend'),
     create_question("Заполните многоточие, чтобы выдать всем пользователям все права для этого файла: \nsudo chmod " +
-                    "<...> /vezdekod/vezdehits.txt?",
-                    ["777"], 'security'),
+        "<...> /vezdekod/vezdehits.txt?",
+        ["777"], 'security'),
     create_question("Какую сред`у разработки используют для создания android-приложений?",
-                    ["android studio, androidstudio"], 'mobile'),
+        ["android studio, androidstudio"], 'mobile'),
     create_question("Как`ой `алгоритм имеет в ^худшем^ случае асимпт`отитическую сложность {nlogn}{эн лог эн}?" +
-                    "\n1. quickSort(X)\n2. bubbleSort(X)\n3. mergeSort(X)",
-                    ["3"], 'algorithms')
+        "\n1. quickSort(X)\n2. bubbleSort(X)\n3. mergeSort(X)",
+        ["3"], 'algorithms')
 ]
 
 
@@ -91,13 +91,53 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
                     session,
                     {
                         "text": f"Больше всего вам подходит категория {argmax}",
-                        "tts": questions[user['stage']]["text"],
+                        "tts": f"Больше всего вам подходит категория {argmax}",
                     }
                 ))
                 del user
 
         if request['command'] in ['вопросы об it', 'vezdehits вопросы об it']:
             users[user_id] = create_counter()
+            self.send_as_json(create_response(
+                session,
+                {
+                    'text': questions[0]['text'],
+                    'tts': questions[0]['text']
+                }
+            ))
+            return
+
+        if request['command'] in ['vezdehits вездекод', 'vezdehits вездеход']:
+            self.send_as_json(create_response(
+                session,
+                {
+                    'text': "Привет вездекодерам!",
+                    'tts': "Привет вездекодерам!"
+                }
+            ))
+            return
+
+        self.send_as_json(create_response(
+            session,
+            {
+                "text": "Не понял.",
+                "tts": "Не понял."
+            },
+            buttons={
+                0: {
+                    'title': 'VEZDEHITS Вездекод',
+                    'payload': {
+                        'text': 'VEZDEHITS Вездекод'
+                    }
+                },
+                1: {
+                    'title': 'VEZDEHITS Вездекод',
+                    'payload': {
+                        'text': 'VEZDEHITS Вездекод'
+                    }
+                }
+            }
+        ))
 
     def send_as_json(self, answer):
         self.wfile.write(bytes(json.dumps(answer), "utf-8"))

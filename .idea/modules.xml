@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/VezdehodBack.iml" filepath="$PROJECT_DIR$/.idea/VezdehodBack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VezdehodBackEnd.iml" filepath="$PROJECT_DIR$/VezdehodBackEnd.iml" />
     </modules>
   </component>
 </project>

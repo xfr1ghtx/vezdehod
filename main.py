@@ -5,8 +5,26 @@ import json
 def create_question(text, answers, category):
     return {
         'text': text,
-        'answers': answers
+        'answers': answers,
+        'category': category
     }
+
+
+def create_card(pic_id, card_type="BigImage", url=None):
+    return {
+        'type': card_type,
+        'image_id': pic_id,
+        'url': url
+    }
+
+
+cards = {
+    'backend': create_card(457239019),
+    'mobile': create_card(457239018),
+    'security': create_card(457239020),
+    'algorithms': create_card(457239017),
+    'mem': create_card(457239022, "MiniApp", "https://vk.com/app7543093")
+}
 
 
 def create_counter():
@@ -90,9 +108,26 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
                 self.send_as_json(create_response(
                     session,
                     {
-                        "text": f"Больше всего вам подходит категория {argmax}",
-                        "tts": f"Больше всего вам подходит категория {argmax}",
-                    }
+                        "text": f"<speaker audio=marusia-sounds/game-win-1>" +
+                                f"Вам подходит категория {argmax}!" +
+                                f"\nВаши баллы:" +
+                                f"\nСпортпрог: {user['algorithms']}"
+                                f"\nMobile: {user['mobile']}"
+                                f"\nBack end: {user['backend']}"
+                                f"\nИнфобез: {user['security']}",
+                        "tts": f"<speaker audio=marusia-sounds/game-win-1>" +
+                                f"Вам подходит категория {argmax}!" +
+                                f"\nВаши баллы:" +
+                                f"\nСпортпрог: {user['algorithms']}"
+                                f"\nMobile: {user['mobile']}"
+                                f"\nBack end: {user['backend']}"
+                                f"\nИнфобез: {user['security']}",
+                        "commands": [
+                            cards[argmax],
+                            cards['mem']
+                        ]
+                    },
+
                 ))
                 del user
 

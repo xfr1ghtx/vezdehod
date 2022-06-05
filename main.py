@@ -101,3 +101,8 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def send_as_json(self, answer):
         self.wfile.write(bytes(json.dumps(answer), "utf-8"))
+
+
+server_address = ('0.0.0.0', 7413)
+server = HTTPServer(server_address, MyHTTPRequestHandler)
+server.serve_forever()

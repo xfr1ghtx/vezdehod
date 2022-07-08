@@ -76,6 +76,10 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write('proverka'.encode())
 
     def do_POST(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
         body = json.loads(body)

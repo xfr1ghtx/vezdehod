@@ -74,6 +74,11 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         body = self.rfile.read(content_length)
         body = json.loads(body)
 
+        if ('type' in body) and ('group_id' in body):
+            if (body['type'] == 'confirmation') and (body['group_id'] == 213734019):
+                self.wfile.write(bytes('9167cd1f', "utf-8"))
+                return
+
         request = body['request']
         session = body['session']
         user_id = session['user_id']

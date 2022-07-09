@@ -193,6 +193,6 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(json.dumps(answer), "utf-8"))
 
 
-server_address = ('0.0.0.0', 7314)
+server_address = ('0.0.0.0', 80)
 server = HTTPServer(server_address, MyHTTPRequestHandler)
 server.serve_forever()
